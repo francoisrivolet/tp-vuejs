@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>TP1 Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <h1>TP Majuscule</h1>
+        <p>Saisir un mot et le mettre en majuscule.</p>
+
+        <input v-model="info">
+	    <h3>{{ info2 }}</h3>
+        <button @click="uppercase()"> GO </button>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data :{
+                info:'',
+                info2:''
+            },
+            methods:
+            {
+                uppercase(){
+                    this.info2 = this.info.toUpperCase();
+                },
+            }
+            
+
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<h1>Hello Git !</h1>
+
+<div id="app">
+	<h1>{{ titre }}</h1>
+	<h2>{{ couleur }}</h2>
+	<input v-model="info">
+	<h3>{{ info }}</h3>
+	<!-- directive -->
+	<ul v-for="fruit in tab">
+		<li>{{ fruit }}</li>
+	</ul>
+	<ul v-for="(fruit, index) in tab">
+		<li>{{ index }} - {{ fruit }}</li>
+	</ul>
+	<button @click="affiche()"> GO2 </button>
+	<h4>{{ valeur }}</h4>
+	<h3>{{ test() }}</h3>
+</div>
+
+<!-- le cdn de vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+	const app = new Vue(
+	{
+		el:'#app',
+		data :{
+			info:'Hello  world',
+			titre: 'mon Titre',
+			couleur: 'rouge',
+			tab:['kiwi','poire','cerise']
+		},
+		computed: { 
+				valeur(){
+					return this.titre + ' '+ this.couleur;
+				}
+		},
+		methods:
+		{
+			affiche(){
+				console.log('ok');
+				console.log(this.info);
+			},
+			test (){
+				return 'Je suis un test';
+			}
+		}
+	}
+	);
+	
+</script>
