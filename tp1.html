@@ -5,13 +5,32 @@
 </head>
 <body>
     <div id="app">
-        <h1>Ma première application Vue.js !</h1>
-        <p>J'ai hâte de créer des applications incroyables !</p>
+        <h1>TP Majuscule</h1>
+        <p>Saisir un mot et le mettre en majuscule.</p>
+
+        <input v-model="info">
+	    <h3>{{ info2 }}</h3>
+        <button @click="uppercase()"> GO </button>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
-        const app = new Vue()
+        const app = new Vue({
+            el:'#app',
+            data :{
+                info:'',
+                info2:''
+            },
+            methods:
+            {
+                uppercase(){
+                    this.info2 = this.info.toUpperCase();
+                },
+            }
+            
+
+        })
 </script>
 </body>
 </html>
