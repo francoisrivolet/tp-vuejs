@@ -39,13 +39,23 @@
             el:'#app',
             data :{
 				name :'',
-                tableau :[
+				tableau :[],
+                tableau2 :[
 					{ name:'TV',status:'Allumé',classe:'list-group-item-success'},
 					{ name:'Xbox',status:'Eteint',classe:'list-group-item-danger'},
 					{ name:'PlayStation',status:'Allumé',classe:'list-group-item-success'}
 				],
 				picked : '',
             },
+			mounted() {
+				if (localStorage.getItem('tableau')) {
+					try {
+						this.tableau = JSON.parse(localStorage.getItem('tableau'));
+					} catch(e) {
+						localStorage.removeItem('tableau');
+					}
+				}
+			},
             methods:
             {
 				//Allumer un apparareil
@@ -79,7 +89,13 @@
 						let device = { name:this.name,status:'Eteint',classe:'list-group-item-danger'};
 						this.tableau.push(device);
 						this.name = '';
+						this.save()
 					}
+				},
+				// sauvegarde dans le local storage
+				save(){
+					const parsed = JSON.stringify(this.tableau);
+      				localStorage.setItem('tableau', parsed);
 				}
             }
             
