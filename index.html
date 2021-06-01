@@ -7,44 +7,70 @@
 	<title>Domotique</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="app">
 		<div class="row">
 			<div class="col-xs-12">
 
 				<h2>Les Appareils</h2>
-				<ul class="list-group">
+				<ul class="list-group" v-for="(appareil, index) in tableau">
 					<li 
-					class="list-group-item list-group-item-success"
+					class="list-group-item " v-bind:class="[appareil.classe]"
 					>
-						<h4> TV -- Allumé</h4>
-						<button class="btn btn-success"> ON</button>
-						<button  class="ml-2 btn btn-danger"> OFF</button> 
+						<h4> {{appareil.name}} -- {{appareil.status}}</h4>
+						<button class="btn btn-success" v-on:click="switchOn(index)" >ON</button>
+						<button  class="ml-2 btn btn-danger" v-on:click="switchOff(index)">OFF</button> 
 					</li>
+				</ul>
+				<br>
+				<button class="btn btn-success" v-on:click="switchAllOn()">ALL ON</button>
 
-					<li 
-					class="list-group-item list-group-item-danger"
-					>
-						<h4> Xbox -- Etteind</h4>
-						<button class="btn btn-success"> ON</button>
-						<button  class="ml-2 btn btn-danger"> OFF</button> 
-					</li>
-
-					<li 
-					class="list-group-item list-group-item-success"
-					>
-						<h4> PlayStaion -- allumé</h4>
-						<button class="btn btn-success"> ON</button>
-						<button  class="ml-2 btn btn-danger"> OFF</button> 
-					</li>
-
-
-			</ul>
-			<br>
-			<button class="btn btn-success">ALL ON</button>
-
-			<button  class="ml-2 btn btn-danger">ALL OFF</button>
+				<button  class="ml-2 btn btn-danger" v-on:click="switchAllOff()">ALL OFF</button>
+			</div>
 		</div>
 	</div>
-</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data :{
+				on :{name:'Allumé',classe:'list-group-item-success'},
+				off :{name:'Eteint',classe:'list-group-item-danger'},
+                tableau :[
+					{ name:'TV',status:'Allumé',classe:'list-group-item-success'},
+					{ name:'Xbox',status:'Eteint',classe:'list-group-item-danger'},
+					{ name:'PlayStation',status:'Allumé',classe:'list-group-item-success'}
+				],
+            },
+            methods:
+            {
+				//Allumer un apparareil
+                switchOn(i){
+					this.tableau[i].status = 'Allumé';
+					this.tableau[i].classe = 'list-group-item-success';	
+                },
+				//eteindre un appareil
+				switchOff(i){
+					this.tableau[i].status = 'Eteint';
+					this.tableau[i].classe = 'list-group-item-danger';					
+                },
+				//tout allumer
+				switchAllOn(){
+					this.tableau.forEach(appareil => {
+						appareil.status = 'Allumé';
+						appareil.classe = 'list-group-item-success';
+					});
+                },
+				//tout éteindre
+				switchAllOff(){
+					this.tableau.forEach(appareil => {
+						appareil.status = 'Eteint';
+						appareil.classe = 'list-group-item-danger';
+					});				
+                },
+            }
+            
+
+        })
+    </script>
 </body>
 </html>
