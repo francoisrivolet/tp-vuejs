@@ -1,76 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-	<title>Domotique</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tp Vuejs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
+
 <body>
-	<div class="container" id="app">
-		<div class="row">
-			<div class="col-xs-12">
-
-				<h2>Les Appareils</h2>
-				<ul class="list-group" v-for="(appareil, index) in tableau">
-					<li 
-					class="list-group-item " v-bind:class="[appareil.classe]"
-					>
-						<h4> {{appareil.name}} -- {{appareil.status}}</h4>
-						<button class="btn btn-success" v-on:click="switchOn(index)" >ON</button>
-						<button  class="ml-2 btn btn-danger" v-on:click="switchOff(index)">OFF</button> 
-					</li>
-				</ul>
-				<br>
-				<button class="btn btn-success" v-on:click="switchAllOn()">ALL ON</button>
-
-				<button  class="ml-2 btn btn-danger" v-on:click="switchAllOff()">ALL OFF</button>
-			</div>
-		</div>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script>
-        const app = new Vue({
-            el:'#app',
-            data :{
-				on :{name:'Allumé',classe:'list-group-item-success'},
-				off :{name:'Eteint',classe:'list-group-item-danger'},
-                tableau :[
-					{ name:'TV',status:'Allumé',classe:'list-group-item-success'},
-					{ name:'Xbox',status:'Eteint',classe:'list-group-item-danger'},
-					{ name:'PlayStation',status:'Allumé',classe:'list-group-item-success'}
-				],
-            },
-            methods:
-            {
-				//Allumer un apparareil
-                switchOn(i){
-					this.tableau[i].status = 'Allumé';
-					this.tableau[i].classe = 'list-group-item-success';	
-                },
-				//eteindre un appareil
-				switchOff(i){
-					this.tableau[i].status = 'Eteint';
-					this.tableau[i].classe = 'list-group-item-danger';					
-                },
-				//tout allumer
-				switchAllOn(){
-					this.tableau.forEach(appareil => {
-						appareil.status = 'Allumé';
-						appareil.classe = 'list-group-item-success';
-					});
-                },
-				//tout éteindre
-				switchAllOff(){
-					this.tableau.forEach(appareil => {
-						appareil.status = 'Eteint';
-						appareil.classe = 'list-group-item-danger';
-					});				
-                },
-            }
-            
-
-        })
-    </script>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-5">
+                <h1>TPs Vue.js</h1>
+                <p>Liste des TPs</p>
+                <ul>
+                    <li>
+                        <a href="tp1.html">TP majuscules</a>
+                    </li>
+                    <li>
+                        <a href="tp2.html">TP domotique</a>
+                    </li>
+                    <li>
+                        <a href="tp3.html">TP liste de courses</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

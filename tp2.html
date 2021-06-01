@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<title>Domotique</title>
+</head>
+<body>
+	<div class="container" id="app">
+		<div class="row">
+			<div class="offset-4 col-4">
+
+				<h2>Les Appareils</h2>
+				<div class="form-inline my-5">
+					<input v-model="name" id="new-device-name" class="form-control" placeholder="Ajouter un appareil">
+					<button class="btn btn-success ml-auto" v-on:click="add()" ><div class="fa fa-plus"></div></button>
+				</div>
+				<ul class="list-group" v-for="(appareil, index) in tableau">
+					<li 
+					class="list-group-item " v-bind:class="[appareil.classe]"
+					>
+						<h4> {{appareil.name}} -- {{appareil.status}}</h4>
+						<button class="btn btn-success" v-on:click="switchOn(index)" >ON</button>
+						<button  class="ml-2 btn btn-danger" v-on:click="switchOff(index)">OFF</button> 
+					</li>
+				</ul>
+				<br>
+				<button class="btn btn-success" v-on:click="switchAllOn()">ALL ON</button>
+
+				<button  class="ml-2 btn btn-danger" v-on:click="switchAllOff()">ALL OFF</button>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data :{
+				name :'',
+                tableau :[
+					{ name:'TV',status:'Allumé',classe:'list-group-item-success'},
+					{ name:'Xbox',status:'Eteint',classe:'list-group-item-danger'},
+					{ name:'PlayStation',status:'Allumé',classe:'list-group-item-success'}
+				],
+				picked : '',
+            },
+            methods:
+            {
+				//Allumer un apparareil
+                switchOn(i){
+					this.tableau[i].status = 'Allumé';
+					this.tableau[i].classe = 'list-group-item-success';	
+                },
+				//eteindre un appareil
+				switchOff(i){
+					this.tableau[i].status = 'Eteint';
+					this.tableau[i].classe = 'list-group-item-danger';					
+                },
+				//tout allumer
+				switchAllOn(){
+					this.tableau.forEach(appareil => {
+						appareil.status = 'Allumé';
+						appareil.classe = 'list-group-item-success';
+					});
+                },
+				//tout éteindre
+				switchAllOff(){
+					this.tableau.forEach(appareil => {
+						appareil.status = 'Eteint';
+						appareil.classe = 'list-group-item-danger';
+					});				
+                },
+				//ajouter un device
+				add(){
+					if( this.name != '')
+					{
+						let device = { name:this.name,status:'Eteint',classe:'list-group-item-danger'};
+						this.tableau.push(device);
+						this.name = '';
+					}
+				}
+            }
+            
+
+        })
+    </script>
+</body>
+</html>
